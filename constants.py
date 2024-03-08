@@ -1,3 +1,9 @@
+import jdatetime
+
+
+CURRENT_YEAR = jdatetime.datetime.now().year
+
+
 FIRST_NAMES = [
     'Macan', 'Hadi', 'Amir', 'Hassan', 'Hossein', 'Mehran', 'Mehrdad', 'Soroush',
     'Hassan', 'Mina', 'Mehrane', 'Samira', 'Negin', 'Hadis', 'Arman', 'Ahmad', 'Reza',
