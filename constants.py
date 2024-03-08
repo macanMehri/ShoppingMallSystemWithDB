@@ -16,16 +16,6 @@ LAST_NAMES = [
     'Hamidi', 'Mohammadi', 'Mohammadrezai', 'Asadi', 'Mahmodi', 'Negari', 'Sarinai', 'Armitai'
 ]
 
-CITIES = [
-        'Tehran', 'Gorgan', 'Ahvaz', 'Sari', 'Mashhad', 'Joybar', 'Esfahan', 'Shiraz', 'Rasht'
-        'Karaj', 'Tabriz', 'Bojnord', 'Gonbad', 'Galogah', 'Sirjan', 'Sanandaj', 'kashan'
-]
-
-PROVICES = [
-        'Tehran', 'Esfahan', 'Fars', 'Mazandaran', 'Golestan', 'Khorasan Shomali',
-        'Khorasan Razavi', 'Khorasan Jonobi', 'Gilan', 
-]
-
 MENU = '''
 0. Exit.
 1. Show all datas.
