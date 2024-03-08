@@ -38,3 +38,10 @@ class Customer(peewee.Model):
         Calculate customers age
         '''
         return CURRENT_YEAR - self.birthday
+
+
+    def __str__(self) -> str:
+        return (
+            f'ID: {self.id}\nName: {self.full_name}\n'
+            'Age: {self.age}\nNumber: {self.number}'
+        )
