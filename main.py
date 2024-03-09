@@ -130,6 +130,43 @@ def show_all_products():
         print('-'*20)
 
 
+def customer_buy_product(customer: int, product: int):
+    '''A customer buys a product in a time'''
+    while True:
+        time = input('Do you want to manualy enter date?(Y/N): ')
+        if time == 'Y' or time == 'N':
+            break
+        print('Sorry I cannot understand your request! Please try again.')
+    if time == 'N':
+        year = jdatetime.datetime.now().year
+        month = jdatetime.datetime.now().month
+        day = jdatetime.datetime.now().day
+    else:
+        while True:
+            year = int(input('Please enter year: '))
+            if year <= CURRENT_YEAR:
+                break
+            print('Year is not allowed! Please try again.')
+
+        while True:
+            month = int(input('Please enter month: '))
+            if 0 < month <= 12:
+                break
+            print('Month is not allowed! Please try again.')
+
+        while True:
+            day = int(input('Please enter day: '))
+            if 0 < day <= 31:
+                break
+            print('Day is not allowed! Please try again.')
+
+    ShoppingMall.create(
+        customer=customer,
+        bought_product=product,
+        date=f'{year}-{month}-{day}'
+    )
+
+
 if __name__ == '__main__':
     try:
         # Create tables
@@ -150,7 +187,9 @@ if __name__ == '__main__':
                     create_product()
                 case 3:
                     # A customer buys a product
-                    pass
+                    customer_id = int(input('Please enter a customer id: '))
+                    product_id = int(input('Please enter a product id: '))
+                    customer_buy_product(customer=customer_id, product=product_id)
                 case 4:
                     # Find a customer by id
                     user_id = int(input('Please enter a customer id: '))
