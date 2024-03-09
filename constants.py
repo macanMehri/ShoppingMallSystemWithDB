@@ -16,6 +16,12 @@ LAST_NAMES = [
     'Hamidi', 'Mohammadi', 'Mohammadrezai', 'Asadi', 'Mahmodi', 'Negari', 'Sarinai', 'Armitai'
 ]
 
+PRODUCTS = [
+    'Pen', 'Book', 'Keyboard', 'Mouse', 'Laptop', 'Mobile', 'Pencil', 'Pencilcase', 'Highlighter',
+    'Candle', 'Laser', 'Marker', 'Manitor', 'Handsfree', 'Headset', 'Trashcan', 'Notepad', 'Camera',
+    'Paper', 'Doll', 'Glasses', 'Cup', 'Plate', 'Watch'
+]
+
 MENU = '''
 0. Exit.
 1. Show all datas.
