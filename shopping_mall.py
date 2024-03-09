@@ -22,3 +22,12 @@ class ShoppingMAll(peewee.Model):
     date = peewee.DateField(
         default=jdatetime.datetime.now().date()
     )
+
+
+    def __str__(self) -> str:
+        return (
+            f'Purchased ID: {self.id}\n'
+            f'Customer: {self.customer}\n'
+            f'Product: {self.bought_product}\n'
+            f'Date: {self.date}'
+        )
