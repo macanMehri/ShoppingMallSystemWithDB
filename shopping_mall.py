@@ -2,6 +2,7 @@ import peewee
 from customer import Customer
 from product import Product
 import jdatetime
+from main import database_manager
 
 
 class ShoppingMall(peewee.Model):
@@ -31,3 +32,7 @@ class ShoppingMall(peewee.Model):
             f'Product: {self.bought_product}\n'
             f'Date: {self.date}'
         )
+
+
+    class Meta:
+        database = database_manager.db
