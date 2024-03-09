@@ -35,6 +35,16 @@ def create_random_customer(count: int) -> None:
         )
 
 
+def create_product() -> None:
+    '''Creating products and add them to database'''
+    for product in PRODUCTS:
+        random_price = random.randint(100_000, 10_000_000)
+        Product.create(
+            product_name=product,
+            product_price=random_price
+        )
+
+
 if __name__ == '__main__':
     try:
         # Create tables
