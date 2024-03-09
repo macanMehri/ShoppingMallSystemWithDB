@@ -12,3 +12,7 @@ class Product(peewee.Model):
         null=False,
         verbose_name='Product Price'
     )
+
+
+    def __str__(self) -> str:
+        return f'ID: {self.id}\nProduct Name: {self.product_name}\nPrice: {self.product_price}'
