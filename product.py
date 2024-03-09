@@ -1,5 +1,5 @@
 import peewee
-from main import database_manager
+from database_manager import database_manager
 
 
 class Product(peewee.Model):

@@ -2,7 +2,7 @@ import peewee
 from customer import Customer
 from product import Product
 import jdatetime
-from main import database_manager
+from database_manager import database_manager
 
 
 class ShoppingMall(peewee.Model):
