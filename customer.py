@@ -43,5 +43,5 @@ class Customer(peewee.Model):
     def __str__(self) -> str:
         return (
             f'ID: {self.id}\nName: {self.full_name}\n'
-            'Age: {self.age}\nNumber: {self.number}'
+            f'Age: {self.age}\nNumber: {self.number}'
         )
