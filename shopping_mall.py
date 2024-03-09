@@ -4,7 +4,7 @@ from product import Product
 import jdatetime
 
 
-class ShoppingMAll(peewee.Model):
+class ShoppingMall(peewee.Model):
     '''Shopping Mall Class'''
 
     bought_product = peewee.ForeignKeyField(
