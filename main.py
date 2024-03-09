@@ -173,6 +173,9 @@ if __name__ == '__main__':
         database_manager.create_tables(
             [Customer, Product, ShoppingMall]
         )
+        # If there is zero products in database make some
+        if len(Product) == 0:
+            create_random_product()
         while True:
             print(MENU)
             order = int(input('Please enter a number to run the command: '))
