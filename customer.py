@@ -1,5 +1,8 @@
 import peewee
 from constants import CURRENT_YEAR
+from product import Product
+import jdatetime
+
 
 class Customer(peewee.Model):
     '''Customers class'''
@@ -45,3 +48,12 @@ class Customer(peewee.Model):
             f'ID: {self.id}\nName: {self.full_name}\n'
             f'Age: {self.age}\nNumber: {self.number}'
         )
+
+
+    def buy_product(self, product: Product, date: jdatetime.date) -> dict:
+        '''Buy a product by a customer'''
+        return {
+            'Customer': self,
+            'Product': product,
+            'Date': date
+        }
