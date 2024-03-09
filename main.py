@@ -1,21 +1,12 @@
-from customer import Customer
-from product import Product
 from shopping_mall import ShoppingMall
-from database_manager import DatabaseManager
-from constants import *
-from local_settings import DATABASE
+from constants import FIRST_NAMES, LAST_NAMES, PRODUCTS, CURRENT_YEAR, MENU
+from database_manager import database_manager
+from product import Product
+from customer import Customer
 import jdatetime
 import random
 
 
-# Connect to database useing database_manager
-database_manager = DatabaseManager(
-    database_name=DATABASE['name'],
-    user=DATABASE['user'],
-    password=DATABASE['password'],
-    host=DATABASE['host'],
-    port=DATABASE['port']
-)
 
 def create_random_customer(count: int) -> None:
     '''
@@ -35,7 +26,46 @@ def create_random_customer(count: int) -> None:
         )
 
 
-def create_product() -> None:
+def create_customer() -> None:
+    '''Create a customer and add to mall customers list'''
+    try:
+        while True:
+            first_name = input('Please enter your first name: ').capitalize()
+            if not first_name.isdigit() and len(first_name) > 2:
+                break
+            print('This name is not allowed! Please try again.')
+
+        while True:
+            last_name = input('Please enter your last name: ').capitalize()
+            if not last_name.isdigit() and len(last_name) > 2:
+                break
+            print('This last name is not allowed! Please try again.')
+
+        while True:
+            birth_year = int(input('Please enter your birthdate year: '))
+            if 1300 < birth_year < CURRENT_YEAR:
+                break
+            print('Entery is not correct! Please try again.')
+
+        while True:
+            number = input('Please enter your number: ')
+            if number.isdigit() and len(number) > 3:
+                break
+            print('This number is not allowed! Please try again.')
+
+        Customer.create(
+            first_name=first_name,
+            last_name=last_name,
+            birthday=birth_year,
+            number=number
+        )
+    except Exception as error:
+        print('ERROR:', error)
+    else:
+        print('New customer is added.')
+
+
+def create_random_product() -> None:
     '''Creating products and add them to database'''
     for product in PRODUCTS:
         random_price = random.randint(100_000, 10_000_000)
@@ -45,16 +75,54 @@ def create_product() -> None:
         )
 
 
+def create_product() -> None:
+    '''This function creates a product and add to database'''
+    try:
+        while True:
+            product_name = input('Please enter your product name: ')
+            if not product_name.isdigit() and len(product_name) > 2:
+                break
+            print('This name is not allowed! Please try again.')
+        while True:
+            product_price = float(input('Please enter your product price: '))
+            if product_price > 0:
+                break
+            print('This value is not allowed for price! Please try again.')
+ 
+        Product.create(
+            product_name=product_name,
+            product_price=product_price
+        )
+    except ValueError as error:
+        print('ERROR:', error)
+    else:
+        print('New product is added.')
+
+
 if __name__ == '__main__':
     try:
         # Create tables
         database_manager.create_tables(
             [Customer, Product, ShoppingMall]
         )
-        print(MENU)
-        order = int(input('Please enter a number to run the command: '))
-        create_random_customer(3)
-        create_product()
+        while True:
+            print(MENU)
+            order = int(input('Please enter a number to run the command: '))
+            match order:
+                case 0:
+                    break
+                case 1:
+                    # Add new customer
+                    create_customer()
+                case 2:
+                    # Add new product
+                    create_product()
+                    pass
+                case 3:
+                    # A customer buy a product
+                    pass
+            #create_random_customer(count=3)
+
     except ValueError as error:
         print(error)
     finally:
