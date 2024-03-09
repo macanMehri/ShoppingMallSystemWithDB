@@ -53,6 +53,8 @@ if __name__ == '__main__':
         )
         print(MENU)
         order = int(input('Please enter a number to run the command: '))
+        create_random_customer(3)
+        create_product()
     except ValueError as error:
         print(error)
     finally:

@@ -1,5 +1,6 @@
 '''Libraries'''
 from peewee import PostgresqlDatabase
+from local_settings import DATABASE
 
 
 class DatabaseManager:
@@ -36,3 +37,13 @@ class DatabaseManager:
     def create_tables(self, models):
         '''Create a table of models'''
         self.db.create_tables(models)
+
+
+# Connect to database useing database_manager
+database_manager = DatabaseManager(
+        database_name=DATABASE['name'],
+        user=DATABASE['user'],
+        password=DATABASE['password'],
+        host=DATABASE['host'],
+        port=DATABASE['port']
+)
