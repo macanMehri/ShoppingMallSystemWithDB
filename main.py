@@ -88,7 +88,7 @@ def create_product() -> None:
             if product_price > 0:
                 break
             print('This value is not allowed for price! Please try again.')
- 
+
         Product.create(
             product_name=product_name,
             product_price=product_price
@@ -97,6 +97,37 @@ def create_product() -> None:
         print('ERROR:', error)
     else:
         print('New product is added.')
+
+
+def find_customer_by_id(customer_id: int):
+    '''Find customer by customers id'''
+    return Customer.select().where(Customer.id==customer_id)
+
+
+def find_product_by_id(product_id: int):
+    '''Find product by products name'''
+    return Product.select().where(Product.id==product_id)
+
+
+def find_product_by_name(product_name: str):
+    '''Find product by products name'''
+    return Product.select().where(Product.product_name==product_name)
+
+
+def show_all_customers():
+    '''Print all customers in database'''
+    customers = Customer.select()
+    for customer in customers:
+        print(customer)
+        print('-'*20)
+
+
+def show_all_products():
+    '''Print all products in database'''
+    products = Product.select()
+    for product in products:
+        print(product)
+        print('-'*20)
 
 
 if __name__ == '__main__':
@@ -117,11 +148,42 @@ if __name__ == '__main__':
                 case 2:
                     # Add new product
                     create_product()
-                    pass
                 case 3:
-                    # A customer buy a product
+                    # A customer buys a product
                     pass
-            #create_random_customer(count=3)
+                case 4:
+                    # Find a customer by id
+                    user_id = int(input('Please enter a customer id: '))
+                    customers = find_customer_by_id(customer_id=user_id)
+                    for customer in customers:
+                        print(customer)
+                        print('-'*20)
+                case 5:
+                    # Find product by name
+                    name = input('Please enter a product name: ')
+                    products = find_product_by_name(product_name=name)
+                    for product in products:
+                        print(product)
+                        print('-'*20)
+                case 6:
+                    # Find product by id
+                    user_id = int(input('Please enter a product id: '))
+                    products = find_product_by_id(product_id=user_id)
+                    for product in products:
+                        print(product)
+                        print('-'*20)
+                case 7:
+                    # Show all customers
+                    show_all_customers()
+                case 8:
+                    # Show all products
+                    show_all_products()
+                case 9:
+                    # Create random customers
+                    number_of_cus = int(input(
+                        'Please enter number of customers you want to randomly create: '
+                    ))
+                    create_random_customer(count=number_of_cus)
 
     except ValueError as error:
         print(error)
