@@ -168,11 +168,55 @@ def customer_buy_product(customer: int, product: int):
     )
 
 
-def top_five_sales():
+def make_list_of_purchases() -> list:
     '''
-    Returns a list of top five sales in a year
+    Create a list of dictionaries of shoppingmall table
     '''
+    purchases = list(ShoppingMall.select())
 
+    result = list()
+    for purchase in purchases:
+        # Customers and products are list of theyr ids. So we need to find the object
+        product = find_product_by_id(product_id=purchase.bought_product)
+        customer = find_customer_by_id(customer_id=purchase.customer)
+        temp = {
+            'Product': product[0],
+            'Customer': customer[0],
+            'Date': purchase.date
+        }
+        result.append(temp)
+    return result
+
+
+'''
+def top_five_sales():
+
+    # Purchases in current year
+    purchases = ShoppingMall.select(ShoppingMall).where(ShoppingMall.date.year==CURRENT_YEAR)
+    all_products = Product.select()
+
+    # Calculate number of purchases of each product in a year
+    for purchase in purchases:
+        print(purchase)
+        #print(purchase.bought_product)
+        #if purchase.bought_product == each_product_purchase:
+        #    each_product_purchase['Purchases'] += 1
+    # Find top five
+    max_value = 0
+    temp_product = None
+    top_five_products = list()
+    top_five_purchases = list()
+    for i in range(5):
+        for each_product_purchase in each_product_purchases:
+            if each_product_purchase['Purchases'] > max_value:
+                max_value = each_product_purchase['Purchases']
+                temp_product = each_product_purchase['Product']
+        top_five_products.append(temp_product)
+        top_five_purchases.append(max_value)
+        each_product_purchases.popitem('Product', temp_product)
+    return top_five_products, top_five_purchases
+'''
+    
 
 def create_diagram(y: list, x: list, ylabel: str, titel: str, xlabel: str='Month') -> None:
     '''
@@ -244,6 +288,9 @@ if __name__ == '__main__':
                         'Please enter number of customers you want to randomly create: '
                     ))
                     create_random_customer(count=number_of_cus)
+                case 10:
+                    # Show top five sales
+                    print(make_list_of_purchases())
 
     except ValueError as error:
         print(error)
