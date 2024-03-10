@@ -4,6 +4,7 @@ from database_manager import database_manager
 from product import Product
 from customer import Customer
 import matplotlib.pyplot as plt
+import matplotlib.pyplot
 import jdatetime
 import random
 
@@ -215,6 +216,46 @@ def sales_each_product_this_year() -> list:
     return total_sales
 
 
+def top_five_sales() -> list:
+    '''
+    Return a list of dictionaries of top most sales in this year
+    '''
+    temp = sales_each_product_this_year()
+    top_five = list()
+
+    for i in range(5):
+        maximum = max_purchased(purchases=temp)
+        top_five.append(maximum)
+        temp.remove(maximum)
+
+    return top_five
+
+
+def get_info_of_top_five():
+    """Returns two lists of top five product names and sales"""
+    top_five_purchases = top_five_sales()
+    names = list()
+    purchases = list()
+    for purchase in top_five_purchases:
+        names.append(purchase['Product'].product_name)
+        purchases.append(purchase['Purchases'])
+    return names, purchases
+
+
+def max_purchased(purchases: list) -> dict:
+    '''Returns a dictionary with must purchased'''
+    temp = {
+            'Product': None,
+            'Purchases': 0
+    }
+    for purchase in purchases:
+        if purchase['Purchases'] > temp['Purchases']:
+            temp = purchase
+    if temp['Product']:
+        return temp
+    return purchases[0]
+
+
 def create_diagram(y: list, x: list, ylabel: str, titel: str, xlabel: str='Month') -> None:
     '''
     Create a diagram of purchases and times
@@ -287,7 +328,15 @@ if __name__ == '__main__':
                     create_random_customer(count=number_of_cus)
                 case 10:
                     # Show top five sales
-                    print(top_five_sales())
+                    names, purchases = get_info_of_top_five()
+                    create_diagram(
+                        y=purchases,
+                        x=names,
+                        ylabel='Number Of Purchases',
+                        xlabel='Product Name',
+                        titel='Top Five Sales'
+                    )
+                    plt.show()
 
     except ValueError as error:
         print(error)
