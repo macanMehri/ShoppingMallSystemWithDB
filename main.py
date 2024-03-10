@@ -188,35 +188,32 @@ def make_list_of_purchases() -> list:
     return result
 
 
-'''
-def top_five_sales():
 
-    # Purchases in current year
-    purchases = ShoppingMall.select(ShoppingMall).where(ShoppingMall.date.year==CURRENT_YEAR)
+def sales_each_product_this_year() -> list:
+    '''
+    Create a list of products and total number of purchases
+    '''
+    # List of dictionaries
+    purchases = make_list_of_purchases()
+    # Find all sales in this year
+    this_year_products = list()
+    for purchase in purchases:
+        if purchase['Date'].year == (CURRENT_YEAR):
+            this_year_products.append(purchase['Product'])
+
+    # Get all products
     all_products = Product.select()
 
-    # Calculate number of purchases of each product in a year
-    for purchase in purchases:
-        print(purchase)
-        #print(purchase.bought_product)
-        #if purchase.bought_product == each_product_purchase:
-        #    each_product_purchase['Purchases'] += 1
-    # Find top five
-    max_value = 0
-    temp_product = None
-    top_five_products = list()
-    top_five_purchases = list()
-    for i in range(5):
-        for each_product_purchase in each_product_purchases:
-            if each_product_purchase['Purchases'] > max_value:
-                max_value = each_product_purchase['Purchases']
-                temp_product = each_product_purchase['Product']
-        top_five_products.append(temp_product)
-        top_five_purchases.append(max_value)
-        each_product_purchases.popitem('Product', temp_product)
-    return top_five_products, top_five_purchases
-'''
-    
+    total_sales = list()
+
+    for product in all_products:
+        temp = {
+            'Product': product,
+            'Purchases': this_year_products.count(product)
+        }
+        total_sales.append(temp)
+    return total_sales
+
 
 def create_diagram(y: list, x: list, ylabel: str, titel: str, xlabel: str='Month') -> None:
     '''
@@ -290,7 +287,7 @@ if __name__ == '__main__':
                     create_random_customer(count=number_of_cus)
                 case 10:
                     # Show top five sales
-                    print(make_list_of_purchases())
+                    print(top_five_sales())
 
     except ValueError as error:
         print(error)
