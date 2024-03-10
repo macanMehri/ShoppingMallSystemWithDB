@@ -3,6 +3,7 @@ from constants import FIRST_NAMES, LAST_NAMES, PRODUCTS, CURRENT_YEAR, MENU
 from database_manager import database_manager
 from product import Product
 from customer import Customer
+import matplotlib.pyplot as plt
 import jdatetime
 import random
 
@@ -165,6 +166,23 @@ def customer_buy_product(customer: int, product: int):
         bought_product=product,
         date=f'{year}-{month}-{day}'
     )
+
+
+def top_five_sales():
+    '''
+    Returns a list of top five sales in a year
+    '''
+
+
+def create_diagram(y: list, x: list, ylabel: str, titel: str, xlabel: str='Month') -> None:
+    '''
+    Create a diagram of purchases and times
+    '''
+    plt.figure(figsize=(12, 6), num='Diagram')
+    plt.bar(x, y, color='#47071e', width=0.5)
+    plt.xlabel(xlabel)
+    plt.ylabel(ylabel)
+    plt.title(titel)
 
 
 if __name__ == '__main__':
