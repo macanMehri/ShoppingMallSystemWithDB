@@ -132,6 +132,22 @@ def show_all_products():
         print('-'*20)
 
 
+def customer_exist(customer_id: int) -> bool:
+    '''Check if customer exists in database or not'''
+    temp = Customer.select().where(Customer.id==customer_id)
+    if temp:
+        return True
+    return False
+
+
+def product_exist(product_id: int) -> bool:
+    '''Check if product exists in database or not'''
+    temp = Product.select().where(Product.id==product_id)
+    if temp:
+        return True
+    return False
+
+
 def customer_buy_product(customer: int, product: int):
     '''A customer buys a product in a time'''
     while True:
@@ -169,6 +185,27 @@ def customer_buy_product(customer: int, product: int):
     )
 
 
+def sales_of_month(month: int) -> int:
+    '''Calculate total number of sales in a month'''
+    count = 0
+    purchases = make_list_of_purchases()
+    for purchase in purchases:
+        if purchase['Date'].month == month and purchase['Date'].year == CURRENT_YEAR:
+            count += 1
+    return count
+
+
+def sale_of_year() -> list:
+    '''
+    Each index in list shows number of month
+    And in will calculate total sales of each month of this year
+    '''
+    sales = list()
+    for month in range(12):
+        sales.append(sales_of_month(month=month+1))
+    return sales
+
+
 def make_list_of_purchases() -> list:
     '''
     Create a list of dictionaries of shoppingmall table
@@ -192,7 +229,7 @@ def make_list_of_purchases() -> list:
 
 def sales_each_product_this_year() -> list:
     '''
-    Create a list of products and total number of purchases
+    Create a list of products and total number of purchases in this year
     '''
     # List of dictionaries
     purchases = make_list_of_purchases()
@@ -232,7 +269,7 @@ def top_five_sales() -> list:
 
 
 def get_info_of_top_five():
-    """Returns two lists of top five product names and sales"""
+    '''Returns two lists of top five product names and sales'''
     top_five_purchases = top_five_sales()
     names = list()
     purchases = list()
@@ -290,16 +327,27 @@ if __name__ == '__main__':
                     create_product()
                 case 3:
                     # A customer buys a product
-                    customer_id = int(input('Please enter a customer id: '))
-                    product_id = int(input('Please enter a product id: '))
+                    while True:
+                        customer_id = int(input('Please enter a customer id: '))
+                        if customer_exist(customer_id=customer_id):
+                            break
+                        print('Cannot find this customer! Please try again.')
+                    while True:
+                        product_id = int(input('Please enter a product id: '))
+                        if product_exist(product_id=product_id):
+                            break
+                        print('Cannot find this product! Please try again.')
                     customer_buy_product(customer=customer_id, product=product_id)
                 case 4:
                     # Find a customer by id
                     user_id = int(input('Please enter a customer id: '))
-                    customers = find_customer_by_id(customer_id=user_id)
-                    for customer in customers:
-                        print(customer)
-                        print('-'*20)
+                    if customer_exist(customer_id=user_id):
+                        customers = find_customer_by_id(customer_id=user_id)
+                        for customer in customers:
+                            print(customer)
+                            print('-'*20)
+                    else:
+                        print('Cannot find this customer! Please try again.')
                 case 5:
                     # Find product by name
                     name = input('Please enter a product name: ')
@@ -310,10 +358,13 @@ if __name__ == '__main__':
                 case 6:
                     # Find product by id
                     user_id = int(input('Please enter a product id: '))
-                    products = find_product_by_id(product_id=user_id)
-                    for product in products:
-                        print(product)
-                        print('-'*20)
+                    if product_exist(product_id=user_id):
+                        products = find_product_by_id(product_id=user_id)
+                        for product in products:
+                            print(product)
+                            print('-'*20)
+                    else:
+                        print('Cannot find this product! Please try again.')
                 case 7:
                     # Show all customers
                     show_all_customers()
@@ -335,6 +386,16 @@ if __name__ == '__main__':
                         ylabel='Number Of Purchases',
                         xlabel='Product Name',
                         titel='Top Five Sales'
+                    )
+                    plt.show()
+                case 11:
+                    #Each month sales
+                    sales = sale_of_year()
+                    create_diagram(
+                        y=sales,
+                        x=list(range(1, 13)),
+                        ylabel='Number Of Sales',
+                        titel='Total Sales In A Year'
                     )
                     plt.show()
 
