@@ -24,9 +24,17 @@ PRODUCTS = [
 
 MENU = '''
 0. Exit.
-1. Show all datas.
-2. Add random datas to database.
-3. Add new data.
-4. Delete an existed data.
-5. Update an existed data.
+1. Add new customer.
+2. Add new product.
+3. Customer buy a product.
+4. Find a customer by id.
+5. Find product by name.
+6. Find product by id.
+7. Show all customers.
+8. Show all products.
+9. Create random customers.
+10. Show a chart of top five sales of a year.
+11. Show a chart of total number of sales of a year.
+12. Show a chart of total earnings of a year.
+13. Show three charts of numbers 10,11,12 in same page.
 '''
