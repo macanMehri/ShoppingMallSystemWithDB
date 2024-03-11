@@ -314,11 +314,39 @@ def max_purchased(purchases: list) -> dict:
     return purchases[0]
 
 
+def three_diagrams() -> None:
+    '''
+    Shows three diagrams of:
+    five most purchased, total number of sales and total money earned
+    '''
+    figure, axis = plt.subplots(1, 3)
+
+    monthly_sale = sale_of_year()
+    monthly_earning = earning_of_year()
+    names, purchases = get_info_of_top_five()
+
+    months = list(range(1, 13))
+
+    # For monthly sales
+    axis[0].bar(months, monthly_sale, color='#081375')
+    axis[0].set_title('Monthly Sales')
+
+    # For monthly earning
+    axis[1].bar(months, monthly_earning, color='#227508')
+    axis[1].set_title('Monthly Earning')
+
+    # For top five sales
+    axis[2].bar(names, purchases, color='#47071e')
+    axis[2].set_title('Top five sales')
+
+    plt.show()
+
+
 def create_diagram(y: list, x: list, ylabel: str, titel: str, xlabel: str='Month') -> None:
     '''
     Create a diagram of purchases and times
     '''
-    plt.figure(figsize=(12, 6), num='Diagram')
+    plt.figure(figsize=(12, 6), num='Chart')
     plt.bar(x, y, color='#47071e', width=0.5)
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
@@ -429,6 +457,10 @@ if __name__ == '__main__':
                         titel='Total Earnings In A Year'
                     )
                     plt.show()
+                case 13:
+                    # Show three diagrams of:
+                    # Total earnings of year, total sales of year and top five
+                    three_diagrams()
 
 
     except ValueError as error:
