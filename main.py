@@ -5,8 +5,10 @@ from product import Product
 from customer import Customer
 import matplotlib.pyplot as plt
 import matplotlib.pyplot
+from argparse import ArgumentParser
 import jdatetime
 import random
+import sys
 
 
 
@@ -314,7 +316,7 @@ def max_purchased(purchases: list) -> dict:
     return purchases[0]
 
 
-def three_diagrams() -> None:
+def show_three_diagrams() -> None:
     '''
     Shows three diagrams of:
     five most purchased, total number of sales and total money earned
@@ -353,7 +355,32 @@ def create_diagram(y: list, x: list, ylabel: str, titel: str, xlabel: str='Month
     plt.title(titel)
 
 
+def pass_arguments():
+    '''Parses arguments and performs actions based on them.'''
+    parser = ArgumentParser(add_help=False)
+    run_args_help = (
+        'Show three diagrams of five most purchased, total number of sales and total money earned.'
+    )
+    help_args_help = (
+        'If you want to see three diagrams you can use -r argument.'
+    )
+    parser.add_argument('-r', '--report', action='store_true', help=run_args_help)
+    parser.add_argument('-h', '--help', action='store_true', help=help_args_help)
+
+    args = parser.parse_args()
+
+    if args.report:
+        show_three_diagrams()
+    elif args.help:
+        parser.print_help()
+
+
 if __name__ == '__main__':
+
+    if len(sys.argv) > 1:
+        pass_arguments()
+        sys.exit()
+
     try:
         # Create tables
         database_manager.create_tables(
@@ -460,7 +487,7 @@ if __name__ == '__main__':
                 case 13:
                     # Show three diagrams of:
                     # Total earnings of year, total sales of year and top five
-                    three_diagrams()
+                    show_three_diagrams()
 
 
     except ValueError as error:
