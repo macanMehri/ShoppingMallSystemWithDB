@@ -198,12 +198,33 @@ def sales_of_month(month: int) -> int:
 def sale_of_year() -> list:
     '''
     Each index in list shows number of month
-    And in will calculate total sales of each month of this year
+    And in will calculate total sales of each month in this year
     '''
     sales = list()
     for month in range(12):
         sales.append(sales_of_month(month=month+1))
     return sales
+
+
+def earning_of_month(month: int) -> float:
+    '''Calculates total earnings of a month'''
+    earning = 0
+    purchases = make_list_of_purchases()
+    for purchase in purchases:
+        if purchase['Date'].month == month and purchase['Date'].year == CURRENT_YEAR:
+            earning += purchase['Product'].product_price
+    return earning
+
+
+def earning_of_year() -> list:
+    '''
+    Each index in list shows number of month
+    And in will calculate total earnings of each month in this year
+    '''
+    earnings = list()
+    for month in range(12):
+        earnings.append(earning_of_month(month=month+1))
+    return earnings
 
 
 def make_list_of_purchases() -> list:
@@ -389,7 +410,7 @@ if __name__ == '__main__':
                     )
                     plt.show()
                 case 11:
-                    #Each month sales
+                    # Each month sales
                     sales = sale_of_year()
                     create_diagram(
                         y=sales,
@@ -398,6 +419,17 @@ if __name__ == '__main__':
                         titel='Total Sales In A Year'
                     )
                     plt.show()
+                case 12:
+                    # Total earning each month of a year
+                    earnings = earning_of_year()
+                    create_diagram(
+                        y=earnings,
+                        x=list(range(1, 13)),
+                        ylabel='Total Earning',
+                        titel='Total Earnings In A Year'
+                    )
+                    plt.show()
+
 
     except ValueError as error:
         print(error)
