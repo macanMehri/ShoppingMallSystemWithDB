@@ -1,12 +1,9 @@
 
 # Shopping Mall System
 
-A shopping mall system to manage customers and products and store the information in a PostgreSql database. You can add, remove or change informations in the database.
+![ShoppingMall](https://github.com/macanMehri/ShoppingMallSystemWithDB/assets/121973617/710aa363-be04-4d5c-9756-ac1d357a6d2a)
 
-
-## Authors
-
-- [Macan Mehri](https://github.com/macanMehri)
+A shopping mall system to manage customers and products and store the information in a PostgreSql database. You can add, remove or change informations in the database. The best advantage of this program is that you can see your sales statistics for a year in the form of a graph.
 
 
 ## Deployment
@@ -67,11 +64,15 @@ Start the server
 
 ## FAQ
 
-#### Why should I use this program
+#### Why should I use this program؟
 
-Many features that the program gives you, which you can see in section Features
+Many advantages that the program offers you, which you can see in section Features
 
 #### What is the difference between this program and other programs?
 
 Visualizing the information of a store for a better analysis
 
+
+## Authors
+
+- [Macan Mehri](https://github.com/macanMehri)
