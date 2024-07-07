@@ -1,10 +1,10 @@
-'''Libraries'''
+"""Libraries"""
 from peewee import PostgresqlDatabase
 from local_settings import DATABASE
 
 
 class DatabaseManager:
-    '''Database manager class'''
+    """Database manager class"""
 
     def __init__(self, database_name, user, password, host, port):
         self.database_name = database_name
@@ -15,9 +15,8 @@ class DatabaseManager:
 
         self.db = self.connect_to_database()
 
-
     def connect_to_database(self):
-        '''Create connection to database'''
+        """Create connection to database"""
         database_connection = PostgresqlDatabase(
             self.database_name,
             user=self.user,
@@ -28,18 +27,16 @@ class DatabaseManager:
         database_connection.connect()
         return database_connection
 
-
     def close_connection(self):
-        '''Close the connection'''
+        """Close the connection"""
         self.db.close()
 
-
     def create_tables(self, models):
-        '''Create a table of models'''
+        """Create a table of models"""
         self.db.create_tables(models)
 
 
-# Connect to database useing database_manager
+# Connect to database using database_manager
 database_manager = DatabaseManager(
         database_name=DATABASE['name'],
         user=DATABASE['user'],

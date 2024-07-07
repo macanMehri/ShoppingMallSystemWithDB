@@ -6,7 +6,7 @@ from database_manager import database_manager
 
 
 class Customer(peewee.Model):
-    '''Customers class'''
+    """Customers class"""
     first_name = peewee.CharField(
         max_length=50,
         null=False,
@@ -27,22 +27,19 @@ class Customer(peewee.Model):
         verbose_name='Number'
     )
 
-
     @property
     def full_name(self) -> str:
-        '''
-        Concatinate first name and last name to create full name
-        '''
+        """
+        Concatenate first name and last name to create full name
+        """
         return f'{self.first_name} {self.last_name}'
-
 
     @property
     def age(self) -> int:
-        '''
+        """
         Calculate customers age
-        '''
+        """
         return CURRENT_YEAR - self.birthday
-
 
     def __str__(self) -> str:
         return (
@@ -50,15 +47,13 @@ class Customer(peewee.Model):
             f'Age: {self.age}\nNumber: {self.number}'
         )
 
-
     def buy_product(self, product: Product, date: jdatetime.date) -> dict:
-        '''Buy a product by a customer'''
+        """Buy a product by a customer"""
         return {
             'Customer': self,
             'Product': product,
             'Date': date
         }
-
 
     class Meta:
         database = database_manager.db

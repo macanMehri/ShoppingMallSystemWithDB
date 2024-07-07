@@ -11,12 +11,11 @@ import random
 import sys
 
 
-
 def create_random_customer(count: int) -> None:
-    '''
+    """
     Creating random customers and add them to database
     As many as count variable
-    '''
+    """
     for i in range(count):
         random_name = random.choice(FIRST_NAMES)
         random_last_name = random.choice(LAST_NAMES)
@@ -31,7 +30,7 @@ def create_random_customer(count: int) -> None:
 
 
 def create_customer() -> None:
-    '''Create a customer and add to mall customers list'''
+    """Create a customer and add to mall customers list"""
     try:
         while True:
             first_name = input('Please enter your first name: ').capitalize()
@@ -70,7 +69,7 @@ def create_customer() -> None:
 
 
 def create_random_product() -> None:
-    '''Creating products and add them to database'''
+    """Creating products and add them to database"""
     for product in PRODUCTS:
         random_price = random.randint(100_000, 10_000_000)
         Product.create(
@@ -80,7 +79,7 @@ def create_random_product() -> None:
 
 
 def create_product() -> None:
-    '''This function creates a product and add to database'''
+    """This function creates a product and add to database"""
     try:
         while True:
             product_name = input('Please enter your product name: ')
@@ -104,22 +103,22 @@ def create_product() -> None:
 
 
 def find_customer_by_id(customer_id: int):
-    '''Find customer by customers id'''
-    return Customer.select().where(Customer.id==customer_id)
+    """Find customer by customers id"""
+    return Customer.select().where(Customer.id == customer_id)
 
 
 def find_product_by_id(product_id: int):
-    '''Find product by products name'''
-    return Product.select().where(Product.id==product_id)
+    """Find product by products name"""
+    return Product.select().where(Product.id == product_id)
 
 
 def find_product_by_name(product_name: str):
-    '''Find product by products name'''
+    """Find product by products name"""
     return Product.select().where(Product.product_name==product_name)
 
 
 def show_all_customers():
-    '''Print all customers in database'''
+    """Print all customers in database"""
     customers = Customer.select()
     for customer in customers:
         print(customer)
@@ -127,7 +126,7 @@ def show_all_customers():
 
 
 def show_all_products():
-    '''Print all products in database'''
+    """Print all products in database"""
     products = Product.select()
     for product in products:
         print(product)
@@ -135,23 +134,23 @@ def show_all_products():
 
 
 def customer_exist(customer_id: int) -> bool:
-    '''Check if customer exists in database or not'''
-    temp = Customer.select().where(Customer.id==customer_id)
+    """Check if customer exists in database or not"""
+    temp = Customer.select().where(Customer.id == customer_id)
     if temp:
         return True
     return False
 
 
 def product_exist(product_id: int) -> bool:
-    '''Check if product exists in database or not'''
-    temp = Product.select().where(Product.id==product_id)
+    """Check if product exists in database or not"""
+    temp = Product.select().where(Product.id == product_id)
     if temp:
         return True
     return False
 
 
 def customer_buy_product(customer: int, product: int):
-    '''A customer buys a product in a time'''
+    """A customer buys a product in a time"""
     while True:
         time = input('Do you want to manualy enter date?(Y/N): ')
         if time == 'Y' or time == 'N':
@@ -188,7 +187,7 @@ def customer_buy_product(customer: int, product: int):
 
 
 def sales_of_month(month: int) -> int:
-    '''Calculate total number of sales in a month'''
+    """Calculate total number of sales in a month"""
     count = 0
     purchases = make_list_of_purchases()
     for purchase in purchases:
@@ -198,10 +197,10 @@ def sales_of_month(month: int) -> int:
 
 
 def sale_of_year() -> list:
-    '''
+    """
     Each index in list shows number of month
     And in will calculate total sales of each month in this year
-    '''
+    """
     sales = list()
     for month in range(12):
         sales.append(sales_of_month(month=month+1))
@@ -209,7 +208,7 @@ def sale_of_year() -> list:
 
 
 def earning_of_month(month: int) -> float:
-    '''Calculates total earnings of a month'''
+    """Calculates total earnings of a month"""
     earning = 0
     purchases = make_list_of_purchases()
     for purchase in purchases:
@@ -219,10 +218,10 @@ def earning_of_month(month: int) -> float:
 
 
 def earning_of_year() -> list:
-    '''
+    """
     Each index in list shows number of month
     And in will calculate total earnings of each month in this year
-    '''
+    """
     earnings = list()
     for month in range(12):
         earnings.append(earning_of_month(month=month+1))
@@ -230,9 +229,9 @@ def earning_of_year() -> list:
 
 
 def make_list_of_purchases() -> list:
-    '''
+    """
     Create a list of dictionaries of shoppingmall table
-    '''
+    """
     purchases = list(ShoppingMall.select())
 
     result = list()
@@ -251,9 +250,9 @@ def make_list_of_purchases() -> list:
 
 
 def sales_each_product_this_year() -> list:
-    '''
+    """
     Create a list of products and total number of purchases in this year
-    '''
+    """
     # List of dictionaries
     purchases = make_list_of_purchases()
     # Find all sales in this year
@@ -277,9 +276,9 @@ def sales_each_product_this_year() -> list:
 
 
 def top_five_sales() -> list:
-    '''
+    """
     Return a list of dictionaries of top most sales in this year
-    '''
+    """
     temp = sales_each_product_this_year()
     top_five = list()
 
@@ -292,7 +291,7 @@ def top_five_sales() -> list:
 
 
 def get_info_of_top_five():
-    '''Returns two lists of top five product names and sales'''
+    """Returns two lists of top five product names and sales"""
     top_five_purchases = top_five_sales()
     names = list()
     purchases = list()
@@ -303,7 +302,7 @@ def get_info_of_top_five():
 
 
 def max_purchased(purchases: list) -> dict:
-    '''Returns a dictionary with must purchased'''
+    """Returns a dictionary with must purchase"""
     temp = {
             'Product': None,
             'Purchases': 0
@@ -317,10 +316,10 @@ def max_purchased(purchases: list) -> dict:
 
 
 def show_three_diagrams() -> None:
-    '''
+    """
     Shows three diagrams of:
     five most purchased, total number of sales and total money earned
-    '''
+    """
     figure, axis = plt.subplots(1, 3)
 
     monthly_sale = sale_of_year()
@@ -345,9 +344,9 @@ def show_three_diagrams() -> None:
 
 
 def create_diagram(y: list, x: list, ylabel: str, titel: str, xlabel: str='Month') -> None:
-    '''
+    """
     Create a diagram of purchases and times
-    '''
+    """
     plt.figure(figsize=(12, 6), num='Chart')
     plt.bar(x, y, color='#47071e', width=0.5)
     plt.xlabel(xlabel)
@@ -356,7 +355,7 @@ def create_diagram(y: list, x: list, ylabel: str, titel: str, xlabel: str='Month
 
 
 def pass_arguments():
-    '''Parses arguments and performs actions based on them.'''
+    """Parses arguments and performs actions based on them."""
     parser = ArgumentParser(add_help=False)
     run_args_help = (
         'Show three diagrams of five most purchased, total number of sales and total money earned.'
@@ -387,7 +386,7 @@ if __name__ == '__main__':
             [Customer, Product, ShoppingMall]
         )
         # If there is zero products in database make some
-        if len(Product) == 0:
+        if len(Product.objects) == 0:
             create_random_product()
         while True:
             print(MENU)
@@ -488,7 +487,6 @@ if __name__ == '__main__':
                     # Show three diagrams of:
                     # Total earnings of year, total sales of year and top five
                     show_three_diagrams()
-
 
     except ValueError as error:
         print(error)
