@@ -13,7 +13,7 @@ To deploy this project run
 ```bash
   pip install -r requirements.txt
 ```
-Change sample_settings.py file name to local_settings.py and compelet informations in the file like this
+Change sample_settings.py file name to local_settings.py and compelet information in the file like this
 ```bash
   DATABASE = {
     'name': 'database name',
