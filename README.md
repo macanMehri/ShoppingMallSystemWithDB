@@ -3,7 +3,7 @@
 
 ![ShoppingMall](https://github.com/macanMehri/ShoppingMallSystemWithDB/assets/121973617/710aa363-be04-4d5c-9756-ac1d357a6d2a)
 
-A shopping mall system to manage customers and products and store the information in a PostgreSql database. You can add, remove or change informations in the database. The best advantage of this program is that you can see your sales statistics for a year in the form of a graph.
+A shopping mall system to manage customers and products and store the information in a PostgreSql database. You can add, remove or change information in the database. The best advantage of this program is that you can see your sales statistics for a year in the form of a graph.
 
 
 ## Deployment
